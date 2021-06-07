@@ -1,0 +1,15 @@
+{
+ :env-keys    ["cc.env" "CC_ENV"]
+ :run-cmd     "phantomjs resources/public/specs/speclj.js"
+ :development {:cache-analysis true
+               :optimizations  :none
+               :output-dir     "resources/public/cljs/"
+               :output-to      "resources/public/cljs/cc-web-app.js"
+               :pretty-print   true
+               :source-map     true
+               :sources        ["spec/cljc" "spec/cljs" "src/cljc" "src/cljs"]
+               :specs          true
+               :verbose        false
+               :watch-fn       c3kit.scaffold.cljs/on-dev-compiled
+               }
+ }

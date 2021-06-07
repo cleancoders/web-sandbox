@@ -1,1 +1,1 @@
-# cc-web-template
+# cc-web-app
