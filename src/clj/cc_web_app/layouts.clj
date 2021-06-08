@@ -5,13 +5,14 @@
 			[c3kit.wire.api :as api]
 			[c3kit.wire.assets :refer [add-fingerprint]]
 			[c3kit.wire.flash :as flash]
+			[cc-web-app.config :as config]
+			[cc-web-app.layoutc :as layoutc]
 			[clj-stacktrace.core :as cst]
 			[clj-stacktrace.repl :as cstr]
 			[clojure.string :as str]
 			[hiccup.core :as hiccup]
 			[hiccup.element :as elem]
 			[hiccup.page :as page]
-			[cc-web-app.layoutc :as layoutc]
 			[ring.util.response :as response]
 			))
 
@@ -28,12 +29,20 @@
 												[:title (title options)]
 												[:meta {:charset "utf-8"}]
 												[:meta {:name "viewport" :content "width=device-width, initial-scale=1.0, minimum-scale=1.0"}]
+												[:link {:rel "icon" :sizes "16x16" :type "image/png" :href "/images/favicons/favicon-16x16.png"}]
+												[:link {:rel "icon" :sizes "32x32" :type "image/png" :href "/images/favicons/favicon-32x32.png"}]
+												[:link {:rel "icon" :sizes "192x192" :type "image/png" :href "/images/favicons/favicon-192x192.png"}]
+												[:link {:rel "icon" :sizes "512x512" :type "image/png" :href "/images/favicons/favicon-512x512.png"}]
+												[:link {:rel "apple-touch-icon" :sizes "180x180" :href "/images/favicons/apple-touch-icon.png"}]
+												[:link {:rel "manifest" :href "/images/favicons/site.webmanifest"}]
 												[:link {:rel         "stylesheet"
 																				:href        "https://use.fontawesome.com/releases/v5.3.1/css/all.css"
 																				:integrity   "sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
 																				:crossorigin "anonymous"}]
-												(page/include-js (add-fingerprint "/cljs/cc-web-app.js"))
+												;(list
+												;		(page/include-js "/cljs/goog/base.js"))
 												(:head options)                                 ;; MDM - must go after js so we can include js-fns, and before css, so we can override styles as needed
+												;(elem/javascript-tag (:analytics-code config/env))
 												(page/include-css (add-fingerprint (or (:css options) "/css/cc-web-app.css")))]
 											[:body body]))
 
@@ -48,12 +57,14 @@
 (defn not-found []
 		(response/status
 				(static
-						(layoutc/base
+						(layoutc/home-main
+								(layoutc/home-card
+										layoutc/home-logo
 										[:hr]
 										[:div.container.text-align-center
 											[:h2.small-margin-bottom "Page Not Found"]
 											[:p "Sorry, we don't know where this page is."]])))
-				404)
+				404))
 
 (defn client-init
 		([] (client-init {}))
@@ -69,14 +80,18 @@
 (defn rich-client
 		([options] (rich-client {} options))
 		([payload options]
+			(default (list [:div#app-root rich-client-placeholder]
+														(client-init payload))
 					(assoc options
-							:head (elem/javascript-tag (str "goog.require('cc-web-app.main');")))))
+							:head (elem/javascript-tag (str "goog.require('cc-web-app.main');"))))))
 
 (defn build-rich-client-payload [request]
 		{:flash  (flash/messages request)
 			:config {
 												;:anti-forgery-token (:anti-forgery-token request)
-												:api-version        (api/version)
+												:api-version (api/version)
+												:environment config/environment
+												:host        config/host
 												;:csrf-token         (:session/key request)
 												}})
 

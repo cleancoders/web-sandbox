@@ -1,7 +1,7 @@
 (ns cc-web-app.styles.core
   (:refer-clojure :exclude [rem])
   (:require
-    [cc-web-app-styles.palette :refer :all]
+    [cc-web-app.styles.palette :refer :all]
     [garden.units :as units]
 ))
 

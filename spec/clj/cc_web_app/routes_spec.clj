@@ -1,4 +1,4 @@
-(ns routes-spec
+(ns cc-web-app.routes-spec
   (:require
    [c3kit.apron.log :as log]
    [c3kit.apron.utilc :as utilc]
@@ -9,7 +9,7 @@
    [cc-web-app.spec-helper]
    [speclj.core :refer :all]
    [speclj.stub :as stub]
-   ))
+   [cc-web-app.layouts :as layouts]))
 
 (def args (atom :none))
 
@@ -33,12 +33,6 @@
      (let [response# (routes/handler {:uri ~path :request-method ~method})]
        (wire-helper/should-redirect-to response# ~dest))))
 
-(defmacro test-webs [id sym]
-  `(it (str "remote " ~id " -> " '~sym)
-     (let [action# (ws/resolve-handler ~id)]
-       (should-not= nil action#)
-       (should= '~sym (.toSymbol action#)))))
-
 (describe "Routes"
 
   (with-stubs)
@@ -48,19 +42,15 @@
   ; Please keep these specs sorted alphabetically
 
   ;; web routes
+  (test-route "/" :get cc-web-app.layouts/web-rich-client)
   (test-route "/pages/test-page" :get cc-web-app.layouts/web-rich-client)
 
   ;; websocket handlers
   ;(test-webs :admin/access poker.admin/ws-access-admin)
 
-  ;(it "not-found global - nil - handled by http"
-  ;  (let [response (routes/handler {:uri "/blah" :request-method :get})]
-  ;    (should= nil response)))
-  ;
-  ;(it "not-found for api-calls"
-  ;  (let [response (routes/handler {:uri "/api/v1/blah" :request-method :get})
-  ;        body (utilc/<-transit (:body response))]
-  ;    (should= :fail (:status body))
-  ;    (should= "API not found: /api/v1/blah" (-> body :flash first flashc/text))))
+  (it "not-found global - nil - handled by http"
+    (let [response (routes/handler {:uri "/blah" :request-method :get})]
+      (should= nil response)))
+
   )
 

@@ -1,7 +1,7 @@
 (ns cc-web-app.styles.reset
   (:refer-clojure :exclude [rem])
   (:require
-    [cc-web-app-styles.core :refer :all]
+    [cc-web-app.styles.core :refer :all]
     [garden.stylesheet :refer [at-media]]
 ))
 

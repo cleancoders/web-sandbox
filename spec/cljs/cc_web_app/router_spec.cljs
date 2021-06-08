@@ -1,7 +1,8 @@
 (ns cc-web-app.router-spec
   (:require-macros [speclj.core :refer [describe context it should-not-be-nil should-be-nil should= should-not
                                         should-not= should-have-invoked after before with-stubs with around
-                                        stub should-contain should-not-contain should before-all]])
+                                        stub should-contain should-not-contain should before-all]]
+                   [cc-web-app.spec-helperc :refer [it-routes]])
   (:require
    [c3kit.apron.log :as log]
    [cc-web-app.page :as page]
@@ -9,15 +10,6 @@
    [secretary.core :as secretary]
    [speclj.core]
    ))
-
-(defmacro it-routes
-  "Tests a client side route"
-  [path page-key & body]
-  `(it ~path
-     (with-redefs [cc-web-app.router/load-page! (stub :load-page!)]
-       (cc-web-app.router/dispatch! ~path)
-       (should-have-invoked :load-page! {:with [~page-key]})
-       ~@body)))
 
 (describe "Router"
 
@@ -27,5 +19,6 @@
     (secretary/reset-routes!)
     (router/app-routes))
 
-  (it-routes "/pages/test-page" :page)
+  (it-routes "/" :home)
+  (it-routes "/pages/test-page" :pages/test-page)
   )

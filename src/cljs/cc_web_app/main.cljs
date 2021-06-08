@@ -40,7 +40,7 @@
 (defn dispatch-and-render []
 		(router/app-routes)
 		(accountant/dispatch-current!)
-		(dom/render [layout/layout] (.getElementById js/document "app-root")))
+		(dom/render [layout/default] (.getElementById js/document "app-root")))
 
 (defn establish-session [config]
 		(config/install! config)

@@ -1,7 +1,7 @@
 (ns cc-web-app.styles.tables
   (:refer-clojure :exclude [rem])
-  (:require [cc-web-app-styles.palette :refer :all]
-            [cc-web-app-styles.core :refer :all]
+  (:require [cc-web-app.styles.palette :refer :all]
+            [cc-web-app.styles.core :refer :all]
             [garden.color :as color]
             [garden.stylesheet :refer [at-media]]
             [garden.def :refer [defstyles]]

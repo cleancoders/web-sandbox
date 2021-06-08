@@ -2,18 +2,18 @@
   (:refer-clojure :exclude [rem])
   (:require
     [garden.def :as garden]
-    [cc-web-app-styles.components :as components]
-    [cc-web-app-styles.core :refer :all]
-    [cc-web-app-styles.forms :as forms]
-    [cc-web-app-styles.icons :as icons]
-    [cc-web-app-styles.layout :as layout]
-    [cc-web-app-styles.modals :as modals]
-    [cc-web-app-styles.palette :refer :all]
-    [cc-web-app-styles.print :as print]
-    [cc-web-app-styles.reset :as reset]
-    [cc-web-app-styles.responsive :as responsive]
-    [cc-web-app-styles.tables :as tables]
-    [cc-web-app-styles.typography :as typography]
+    [cc-web-app.styles.components :as components]
+    [cc-web-app.styles.core :refer :all]
+    [cc-web-app.styles.forms :as forms]
+    [cc-web-app.styles.icons :as icons]
+    [cc-web-app.styles.layout :as layout]
+    [cc-web-app.styles.modals :as modals]
+    [cc-web-app.styles.palette :refer :all]
+    [cc-web-app.styles.print :as print]
+    [cc-web-app.styles.reset :as reset]
+    [cc-web-app.styles.responsive :as responsive]
+    [cc-web-app.styles.tables :as tables]
+    [cc-web-app.styles.typography :as typography]
     ))
 
 (garden/defstyles screen

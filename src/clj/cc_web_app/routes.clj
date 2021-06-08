@@ -18,7 +18,9 @@
 												(not-found-handler request)))))))
 
 (def resolve-handler
-		(fn [handler-sym] (util/resolve-var handler-sym)))
+		(fn [handler-sym] (util/resolve-var handler-sym))
+		;(memoize (fn [handler-sym] (util/resolve-var handler-sym)))
+		)
 
 (defn lazy-handle
 		"Reduces load burden of this ns, which is useful in development.
@@ -55,14 +57,17 @@
 (def web-routes-handlers
 		(lazy-routes
 				{
-					}))
-
-(def app-handler
-		(lazy-routes
-				{
+					["/" :get]            cc-web-app.layouts/web-rich-client
 					["/pages/:page" :get] cc-web-app.layouts/web-rich-client
 					}))
 
+;(def app-handler
+;		(lazy-routes
+;				{
+;					["/pages/:page" :get] cc-web-app.layouts/web-rich-client
+;					}))
+
 (defroutes handler
-		app-handler
+		web-routes-handlers
+		;app-handler
 		)

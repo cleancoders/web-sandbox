@@ -8,6 +8,7 @@
 				(assert (map? new-config) "Config must come as a map")
 				(swap! state merge new-config)))
 
+(defn environment [] (:environment @state))
 (defn host [] (:host @state))
 (defn link [& parts] (apply str (host) parts))
 (defn cleancoders-root [] (:cleancoders-root @state))

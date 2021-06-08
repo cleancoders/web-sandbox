@@ -9,19 +9,6 @@
 							[cc-web-app.config :as config]
 							;[cc-web-app.errors :as errors]
 							[cc-web-app.layouts :as layouts]
-							;[cc-web-app.session :as session]
-							[ring.middleware.anti-forgery :refer [wrap-anti-forgery]]
-							[ring.middleware.content-type :refer [wrap-content-type]]
-							[ring.middleware.cookies :refer [wrap-cookies]]
-							[ring.middleware.flash :refer [wrap-flash]]
-							[ring.middleware.head :refer [wrap-head]]
-							[ring.middleware.keyword-params :refer [wrap-keyword-params]]
-							[ring.middleware.multipart-params :refer [wrap-multipart-params]]
-							[ring.middleware.nested-params :refer [wrap-nested-params]]
-							[ring.middleware.not-modified :refer [wrap-not-modified]]
-							[ring.middleware.params :refer [wrap-params]]
-							[ring.middleware.resource :refer [wrap-resource]]
-							[ring.middleware.session]
 							))
 
 		(defn refreshable [handler-sym]
@@ -32,10 +19,10 @@
 													(route/not-found (layouts/not-found)))
 
 		(defn app-handler []
-				(util/resolve-var 'cc-web-app.http/web-handler))
-
-		(defn wrap-session [handler]
-				(ring.middleware.session/wrap-session handler {:cookie-name "cc-web-app-session" :store (session/db-session-store)}))
+				(let [wrap-verbose (util/resolve-var 'c3kit.wire.verbose/wrap-verbose)
+										refresh-handler (util/resolve-var 'c3kit.wire.refresh/refresh-handler)]
+						(-> (refresh-handler 'cc-web-app.http/web-handler)
+								wrap-verbose)))
 
 		;; MDM - What's all this refresh/development hocus pocus?  An explanation owed.
 		;;  In development, we want changed code to automatically reload when a request is made.  Although simple in
@@ -52,19 +39,7 @@
 		(defonce root-handler
 											(-> (app-handler)
 													;errors/wrap-errors
-													;wrap-anti-forgery
-													wrap-flash
-													wrap-session
-													wrap-keyword-params
-													wrap-multipart-params
-													wrap-nested-params
-													wrap-params
-													wrap-cookies
-													(wrap-resource "public")
 													wrap-asset-fingerprint
-													wrap-content-type
-													wrap-not-modified
-													wrap-head
 													))
 
 		(defn start [app]

@@ -4,7 +4,6 @@
 
   :main cc-web-app.main
   :dependencies [[clj-http "3.12.1" :exclusions [commons-codec]]
-                 ;[com.cleancoders.c3kit/bucket "1.0.2"]
                  [com.cleancoders.c3kit/wire "1.0.5"]
                  [compojure "1.6.1" :exclusions [ring/ring-core ring/ring-codec]]
                  [hiccup "1.0.5"]

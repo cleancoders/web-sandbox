@@ -20,7 +20,6 @@
 (defmulti render identity)
 (defmulti entering! identity)
 (defmulti leaving! identity)
-(defmulti lobby? identity)
 (defmulti reconnected! identity)
 
 (defmethod render :default [page]
@@ -29,5 +28,4 @@
 
 (defmethod entering! :default [page])
 (defmethod leaving! :default [page])
-(defmethod lobby? :default [page] true)
 (defmethod reconnected! :default [page])

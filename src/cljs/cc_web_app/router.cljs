@@ -38,6 +38,6 @@
 		(secretary/set-config! :prefix "")
 
 		(defroute "/" [] (load-page! :home))
-		(defroute "/pages/:page" [page] (load-page! (keyword page)))
+		(defroute "/pages/:page" [page] (load-page! (keyword (str "pages/" page))))
 
 		(hook-browser-navigation!))

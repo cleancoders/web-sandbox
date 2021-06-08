@@ -1,7 +1,7 @@
  (ns cc-web-app.styles.typography
   (:refer-clojure :exclude [rem])
-  (:require [cc-web-app-styles.core :refer :all]
-            [cc-web-app-styles.palette :refer :all]
+  (:require [cc-web-app.styles.core :refer :all]
+            [cc-web-app.styles.palette :refer :all]
 ))
 
 (def screen
