@@ -1,7 +1,7 @@
 {
- :source-dir  "dev/cc-web-app/cc_web_app.styles"
- :var          cc-web-app.styles.main/screen
- :output-file "resources/public/css/cc-web-app.css"
+ :source-dir  "dev/app/styles"
+ :var          app.styles.main/screen
+ :output-file "resources/public/css/app.css"
  :flags       {:pretty-print? true
                :vendors       ["webkit" "moz" "o"]}
  }

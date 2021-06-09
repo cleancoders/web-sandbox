@@ -11,7 +11,7 @@
 /checkouts
 /classes
 /resources/public/cljs
-/resources/public/css/cc-web-app.css
+/resources/public/css/app.css
 /target
 /tmp
 pom.xml
