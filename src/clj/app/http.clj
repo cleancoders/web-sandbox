@@ -39,7 +39,7 @@
 ;(defn wrap-session [handler]
 ;		(if config/development?
 ;				(fn [request]
-;						(let [;store ((util/resolve-var 'poker.session/db-session-store))
+;						(let [;store ((util/resolve-var 'app.session/db-session-store))
 ;												handler (ring.middleware.session/wrap-session handler {:cookie-name "app-session" :store store})]
 ;								(handler request)))
 ;				(ring.middleware.session/wrap-session handler {:cookie-name "app-session" :store (session/db-session-store)})))

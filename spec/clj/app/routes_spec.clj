@@ -44,9 +44,10 @@
   ;; web routes
   (test-route "/" :get app.layouts/web-rich-client)
   (test-route "/pages/test-page" :get app.layouts/web-rich-client)
+  ;(test-route "/user/websocket" :get app.user-handlers/websocket-open-get)
 
   ;; websocket handlers
-  ;(test-webs :admin/access poker.admin/ws-access-admin)
+  ;(test-webs :admin/access app.admin/ws-access-admin)
 
   (it "not-found global - nil - handled by http"
     (let [response (routes/handler {:uri "/blah" :request-method :get})]

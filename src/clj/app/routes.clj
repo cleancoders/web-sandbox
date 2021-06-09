@@ -57,8 +57,9 @@
 (def web-routes-handlers
 		(lazy-routes
 				{
-					["/" :get]            app.layouts/web-rich-client
-					["/pages/:page" :get] app.layouts/web-rich-client
+					["/" :get]               app.layouts/web-rich-client
+					["/pages/:page" :get]    app.layouts/web-rich-client
+					["/user/websocket" :get] app.user-handlers/websocket-open-get
 					}))
 
 ;(def app-handler

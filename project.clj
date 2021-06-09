@@ -20,6 +20,7 @@
                                     :timeout 120000}
                    :resource-paths ["resources" "dev"]
                    :dependencies   [[clj-commons/secretary "1.2.4"]
+                                    [com.cleancoders.c3kit/bucket "1.0.2"]
                                     [com.cleancoders.c3kit/scaffold "1.0.1"]
                                     [com.google.guava/guava "30.1-jre"] ; need to override 18.0 version required by datomic
                                     [speclj "3.3.2"]
