@@ -4,7 +4,8 @@
 			[c3kit.wire.websocket :as websocket]
 			[app.session :as session]
 			[app.user :as user]
-			))
+			[c3kit.apron.corec :as ccc]
+			[clojure.string :as string]))
 
 
 (defn ajax-csrf-token [request]
@@ -13,6 +14,7 @@
 				(session/copy request)
 				(assoc-in [:session :csrf?] true)))
 
+(defn authorize-user [response user] (update response :session assoc :user user))
 
 (defn websocket-open-get [request] (when (user/current request) (@websocket/get-handler request)))
 ;(defn websocket-open-post [request] (when (user/current request) (@websocket/post-handler request)))

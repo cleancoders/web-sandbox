@@ -44,10 +44,13 @@
   ;; web routes
   (test-route "/" :get app.layouts/web-rich-client)
   (test-route "/pages/test-page" :get app.layouts/web-rich-client)
-  ;(test-route "/user/websocket" :get app.user-handlers/websocket-open-get)
+  (test-route "/user/websocket" :get app.user-handlers/websocket-open-get)
 
   ;; websocket handlers
   ;(test-webs :admin/access app.admin/ws-access-admin)
+
+  ;; ajax routes
+  (test-route "/api/user/csrf-token" :get app.user-handlers/ajax-csrf-token)
 
   (it "not-found global - nil - handled by http"
     (let [response (routes/handler {:uri "/blah" :request-method :get})]

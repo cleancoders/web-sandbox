@@ -18,6 +18,7 @@
 			[app.init :as init]
 			[app.layout :as layout]
 			[app.router :as router]
+			[app.user :as user]
 			[reagent.dom :as dom]
 			))
 
@@ -47,15 +48,14 @@
 		(config/install! config)
 		(if (config/csrf-token)
 				(websocket/start!)
-				(ajax/get! "/api/user/csrf-token" {} establish-session)))
+				;(ajax/get! "/api/user/csrf-token" {} establish-session)
+				 ))
 
 (defn ^:export main [payload-src]
 		(init/configure-api!)
 		(let [payload (utilc/<-transit payload-src)]
-				(println "payload: " payload)
-				(println "(:config pay: " (:config payload))
-				(println "(load-config (:config payload)): " (load-config (:config payload)))
 				(load-config (:config payload))
+				;(user/install-and-connect! (:user payload))
 				(load-flash (:flash payload))
 				(dispatch-and-render)
 				(establish-session {})))

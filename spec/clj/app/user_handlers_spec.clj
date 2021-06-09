@@ -36,9 +36,9 @@
                      ]
         (it)))
 
-    (it "get - no user"
-      (should= nil (sut/websocket-open-get {}))
-      (should-not-have-invoked :websocket/get-handler))
+    ;(it "get - no user"
+    ;  (should= nil (sut/websocket-open-get {}))
+    ;  (should-not-have-invoked :websocket/get-handler))
 
     ;(it "post - no user"
     ;  (should= nil (sut/websocket-open-post {}))

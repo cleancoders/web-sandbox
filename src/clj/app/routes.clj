@@ -54,21 +54,25 @@
 									(let [method (if (= :any method) nil method)]
 											(compojure/compile-route method path 'req `((redirect-handler ~dest)))))))
 
+(def ajax-routes-handler
+		(->
+				(lazy-routes
+						{
+							;["/user/csrf-token" :get]          app.user-handlers/ajax-csrf-token
+							})
+				(wrap-prefix "/api" ajax/api-not-found-handler)
+				ajax/wrap-ajax))
+
 (def web-routes-handlers
 		(lazy-routes
 				{
 					["/" :get]               app.layouts/web-rich-client
 					["/pages/:page" :get]    app.layouts/web-rich-client
-					["/user/websocket" :get] app.user-handlers/websocket-open-get
+					;["/user/websocket" :get] app.user-handlers/websocket-open-get
 					}))
 
-;(def app-handler
-;		(lazy-routes
-;				{
-;					["/pages/:page" :get] app.layouts/web-rich-client
-;					}))
-
 (defroutes handler
+		ajax-routes-handler
 		web-routes-handlers
 		;app-handler
 		)
