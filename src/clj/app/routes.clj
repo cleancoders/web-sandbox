@@ -18,9 +18,10 @@
 												(not-found-handler request)))))))
 
 (def resolve-handler
-		(fn [handler-sym] (util/resolve-var handler-sym))
-		;(memoize (fn [handler-sym] (util/resolve-var handler-sym)))
-		)
+		(if config/development?
+				(fn [handler-sym] (util/resolve-var handler-sym))
+				(memoize (fn [handler-sym] (util/resolve-var handler-sym)))))
+
 
 (defn lazy-handle
 		"Reduces load burden of this ns, which is useful in development.
@@ -54,6 +55,11 @@
 									(let [method (if (= :any method) nil method)]
 											(compojure/compile-route method path 'req `((redirect-handler ~dest)))))))
 
+(def ws-handlers
+		{
+			:page/create 'app.page/ws-create
+			})
+
 (def ajax-routes-handler
 		(->
 				(lazy-routes
@@ -67,12 +73,17 @@
 		(lazy-routes
 				{
 					["/" :get]               app.layouts/web-rich-client
-					["/pages/:page" :get]    app.layouts/web-rich-client
-					;["/user/websocket" :get] app.user-handlers/websocket-open-get
+					["/user/websocket" :get] app.user-handlers/websocket-open-get
+					}))
+
+(def dev-handler
+		(lazy-routes
+				{
+					["/pages/:page" :get] app.layouts/web-rich-client
 					}))
 
 (defroutes handler
 		ajax-routes-handler
 		web-routes-handlers
-		;app-handler
+		(if config/development? dev-handler (fn [_] nil))
 		)

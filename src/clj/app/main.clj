@@ -17,12 +17,18 @@
 
 (def all-services [env http websocket/service])
 
+(defn maybe-init-dev []
+  (when config/development?
+    (let [refresh-init (util/resolve-var 'c3kit.wire.refresh/init)]
+      (refresh-init [] "app" ['app.http 'app.main]))))
+
 (defn start-all [] (app/start! all-services))
 (defn stop-all [] (app/stop! all-services))
 
 (defn -main []
   (log/report "----- STARTING Clean Coders Web-App SERVER -----")
   (init/configure-api!)
+  (maybe-init-dev)
   (.addShutdownHook (Runtime/getRuntime) (Thread. stop-all))
   (.addShutdownHook (Runtime/getRuntime) (Thread. shutdown-agents))
   (start-all))

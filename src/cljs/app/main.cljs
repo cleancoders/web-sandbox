@@ -1,9 +1,9 @@
 (ns app.main
+		(:require-all-ns [app.pages])
 		(:require
 			;; MDM - the following namespaces contain multimethod implementations which decouples them nicely.
 			;;   However they need to be required somewhere.
 			[app.home]
-			[app.pages.test-page]
 
 			;; Normal requires
 			[accountant.core :as accountant]
@@ -30,14 +30,17 @@
 				(flash/add! flash)))
 
 (defn load-config [config]
-		(api/configure! {:version            (:api-version config)
-																			:anti-forgery-token (:anti-forgery-token config)
-																			:csrf-token         (:csrf-token config)})
-		(config/install! config)
-		(log/debug "loading app routes")
-		(router/app-routes)
-		(reset! flash/flash-timeout-millis 5000)                  ;; Remove on c3kit.wire 1.0.4+
-		)
+(api/configure! {:version            (:api-version config)
+																	:anti-forgery-token (:anti-forgery-token config)
+																	:csrf-token         (:csrf-token config)})
+(config/install! config)
+(if (config/production?)
+		(log/warn!)
+		(log/debug!))
+(when (config/development?)
+		(log/debug "loading dev routes")
+		(router/dev-routes))
+(reset! flash/flash-timeout-millis 5000)) ;; Remove on c3kit.wire 1.0.4+)
 
 (defn dispatch-and-render []
 		(router/app-routes)

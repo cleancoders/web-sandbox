@@ -10,6 +10,7 @@
 
 (defn csrf-token [] (:csrf-token @state))
 (defn development? [] (= "development" (:environment @state)))
+(defn production? [] (= "production" (:environment @state)))
 (defn environment [] (:environment @state))
 (defn host [] (:host @state))
 (defn link [& parts] (apply str (host) parts))

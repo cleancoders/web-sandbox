@@ -27,5 +27,7 @@
     (secretary/reset-routes!)
     (router/app-routes))
 
-  (it-routes "/pages/test-page" :page)
+  (it-routes "/" :home)
+  (it-routes "/pages/example-page" :page/example-page)
+
   )

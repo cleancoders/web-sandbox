@@ -35,9 +35,6 @@
     (it "installs flash"
       (let [flash (flashc/warn "Hello")]
         (sut/main (util/->transit {:flash [flash]}))
-        (println "(flash/): " (flash/flash-message flash))
-        (println "(flash/first-msg): " (flash/first-msg))
-        (println "@flash/state: " @flash/state)
         (should= "Hello" (flash/first-msg))))
 
     (it "installs config"

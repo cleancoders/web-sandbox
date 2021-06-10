@@ -39,9 +39,11 @@
 																				:href        "https://use.fontawesome.com/releases/v5.3.1/css/all.css"
 																				:integrity   "sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
 																				:crossorigin "anonymous"}]
-												(list
-														(page/include-js "/cljs/goog/base.js")
-														(page/include-js "/cljs/app.js"))
+												(if config/development?
+														(list
+																(page/include-js "/cljs/goog/base.js")
+																(page/include-js "/cljs/app_dev.js"))
+														(page/include-js (add-fingerprint "/cljs/app.js")))
 												(:head options)                                 ;; MDM - must go after js so we can include js-fns, and before css, so we can override styles as needed
 												(page/include-css (add-fingerprint (or (:css options) "/css/app.css")))]
 											[:body body]))

@@ -9,7 +9,8 @@
    [app.spec-helper]
    [speclj.core :refer :all]
    [speclj.stub :as stub]
-   [app.layouts :as layouts]))
+   [app.layouts :as layouts]
+   [clojure.java.io :as io]))
 
 (def args (atom :none))
 
@@ -33,6 +34,12 @@
      (let [response# (routes/handler {:uri ~path :request-method ~method})]
        (wire-helper/should-redirect-to response# ~dest))))
 
+(defmacro test-webs [id sym]
+  `(it (str "remote " ~id " -> " '~sym)
+     (let [action# (ws/resolve-handler ~id)]
+       (should-not= nil action#)
+       (should= '~sym (.toSymbol action#)))))
+
 (describe "Routes"
 
   (with-stubs)
@@ -44,13 +51,13 @@
   ;; web routes
   (test-route "/" :get app.layouts/web-rich-client)
   (test-route "/pages/test-page" :get app.layouts/web-rich-client)
-  (test-route "/user/websocket" :get app.user-handlers/websocket-open-get)
+  ;(test-route "/user/websocket" :get app.user-handlers/websocket-open-get)
 
-  ;; websocket handlers
-  ;(test-webs :admin/access app.admin/ws-access-admin)
+  ; websocket handlers
+  (test-webs :page/create app.page/ws-create)
 
   ;; ajax routes
-  (test-route "/api/user/csrf-token" :get app.user-handlers/ajax-csrf-token)
+  ;(test-route "/api/user/csrf-token" :get app.user-handlers/ajax-csrf-token)
 
   (it "not-found global - nil - handled by http"
     (let [response (routes/handler {:uri "/blah" :request-method :get})]

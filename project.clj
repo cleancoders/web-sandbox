@@ -43,5 +43,6 @@
             "css"     ["run" "-m" "c3kit.scaffold.css"]
             "prep"    ["do" "clean," "css" "once," "cljs" "once"]
             "dev"     ["run" "-m" "app.dev"]
+            "page"    ["run" "ws-create" "app.page" opts]
             }
   )
