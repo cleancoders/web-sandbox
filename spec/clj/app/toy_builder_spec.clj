@@ -5,7 +5,7 @@
 			[clojure.java.io :as io]
 			[speclj.core :refer :all]))
 
-(def path (str (.getCanonicalPath (io/file ".")) "/src/clj/app/sandbox"))
+(def path (str (.getCanonicalPath (io/file ".")) "/dev/app/sandbox"))
 
 
 (describe "toy builder"
@@ -42,7 +42,7 @@
 																	"\t;Write Components Here\r\n"
 																	")") (slurp file))
 						(should= 200 (:status response))
-						(should= "ajax-toy has been added to the sandbox" (-> response :body :flash first :text))
+						(should= "ajax-toy has been added to the sandbox!" (-> response :body :flash first :text))
 						(io/delete-file file))))
 
 

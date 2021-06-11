@@ -1,6 +1,5 @@
 (ns app.layouts
 		(:require
-			[c3kit.apron.legend :as legend]
 			[c3kit.apron.utilc :as utilc]
 			[c3kit.wire.api :as api]
 			[c3kit.wire.assets :refer [add-fingerprint]]

@@ -2,11 +2,8 @@
 		(:refer-clojure :exclude [load])
 		(:require
 			[c3kit.bucket.hashid :as hashid]
-			[c3kit.apron.log :as log]
 			[c3kit.apron.time :as time :refer [days ago]]
-			[ring.middleware.session.store :as store]
-			[c3kit.apron.corec :as ccc]
-			[c3kit.apron.schema :as s]))
+			[ring.middleware.session.store :as store]))
 
 (def sessions (atom {}))
 (def session-hash-fns (hashid/hashid-fns "silly poker session, using hashids" 30))
@@ -23,7 +20,6 @@
 (defn current [request] (-> request :session/key load-session))
 
 (defn save-session [key data]
-		(println "data: " data)
 		(if (nil? key)
 				(let [key     (apply * (repeat 4 (rand-int 10000)))
 										session {:id key :kind :session :data (pr-str data) :updated-at (time/now)}]

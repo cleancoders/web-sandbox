@@ -8,7 +8,6 @@
    [app.routes :as routes]
    [app.spec-helper]
    [app.dev-toy-builder]
-   [app.user-handlers]
    [speclj.core :refer :all]
    [speclj.stub :as stub]
    [app.layouts :as layouts]
@@ -55,7 +54,7 @@
   (test-route "/sandbox/example-toy" :get app.layouts/web-rich-client)
 
   ;; ajax routes
-  (test-route "/api/user/csrf-token" :get app.user-handlers/ajax-csrf-token)
+  ;(test-route "/api/user/csrf-token" :get app.user-handlers/ajax-csrf-token)
   (test-route "/api/toy-builder/request-toy" :post app.toy-builder/request-toy)
 
   ;; dev routes

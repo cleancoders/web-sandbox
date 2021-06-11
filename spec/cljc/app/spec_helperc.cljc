@@ -2,7 +2,7 @@
   #?(:cljs (:require-macros [speclj.core :refer [-fail -to-s around]]))
   (:require
    #?(:clj  [speclj.core :refer :all]
-      :cljs [speclj.core])
+      :cljs [speclj.core] [app.router])
    ))
 
 

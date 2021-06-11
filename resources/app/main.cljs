@@ -3,20 +3,20 @@
 			;; MDM - the following namespaces contain multimethod implementations which decouples them nicely.
 			;;   However they need to be required somewhere.
 			[app.home]
-			[app.sandbox.example-toy]
+			;[app.sandbox.example-toy]
 
 			;; Normal requires
 			[accountant.core :as accountant]
-			[app.config :as config]
-			[app.init :as init]
-			[app.layout :as layout]
-			[app.router :as router]
 			[c3kit.apron.log :as log]
 			[c3kit.apron.utilc :as utilc]
 			[c3kit.wire.ajax :as ajax]
 			[c3kit.wire.api :as api]
 			[c3kit.wire.flash :as flash]
 			[goog.events]
+			[app.config :as config]
+			[app.init :as init]
+			[app.layout :as layout]
+			[app.router :as router]
 			[reagent.dom :as dom]
 			))
 
@@ -47,12 +47,17 @@
 
 (defn establish-session [config]
 		(config/install! config)
+		;(if (config/csrf-token)
+				;(websocket/start!)
+				;(ajax/get! "/api/user/csrf-token" {} establish-session)
 				 )
 
 (defn ^:export main [payload-src]
+		;(init/install-reagent-db-atom!)
 		(init/configure-api!)
 		(let [payload (utilc/<-transit payload-src)]
 				(load-config (:config payload))
+				;(user/install-and-connect! (:user payload))
 				(load-flash (:flash payload))
 				(dispatch-and-render)
 				;(establish-session {})
