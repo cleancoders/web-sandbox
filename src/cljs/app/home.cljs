@@ -17,7 +17,8 @@
 			[:hr.margin-bottom]
 			[:div.hgroup.medium-margin-bottom
 				[:h2 "Welcome"]
-				[:button#-create-page-button.primary {:on-click create-page} "Create a Page"]]
+				;[:button#-create-page-button.primary {:on-click create-page} "Create a Page"]
+				]
 			[:ul {:id "-interactive" :class "interactive small-margin-bottom"}
 				[:li {:id "step-1"}
 					[:span {:class "name"} "1. In \"src/cljs/pages\" create a new cljs file."]
