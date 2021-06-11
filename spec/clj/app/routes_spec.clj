@@ -6,6 +6,7 @@
    [c3kit.wire.spec-helper :as wire-helper]
    [c3kit.wire.websocket :as ws]
    [app.routes :as routes]
+   [app.user-handlers]
    [app.spec-helper]
    [speclj.core :refer :all]
    [speclj.stub :as stub]
@@ -50,14 +51,16 @@
 
   ;; web routes
   (test-route "/" :get app.layouts/web-rich-client)
-  (test-route "/pages/test-page" :get app.layouts/web-rich-client)
-  ;(test-route "/user/websocket" :get app.user-handlers/websocket-open-get)
+  (test-route "/pages/example-page" :get app.layouts/web-rich-client)
+  (test-route "/user/websocket" :get app.user-handlers/websocket-open-get)
+  (test-route "/user/websocket" :post app.user-handlers/websocket-open-post)
 
   ; websocket handlers
-  (test-webs :page/create app.page/ws-create)
+  (test-webs :user/auth app.user-handlers/ws-auth-user)
+  (test-webs :page/create app.page-maker/ws-create)
 
   ;; ajax routes
-  ;(test-route "/api/user/csrf-token" :get app.user-handlers/ajax-csrf-token)
+  (test-route "/api/user/csrf-token" :get app.user-handlers/ajax-csrf-token)
 
   (it "not-found global - nil - handled by http"
     (let [response (routes/handler {:uri "/blah" :request-method :get})]

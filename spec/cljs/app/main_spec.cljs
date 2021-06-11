@@ -40,6 +40,7 @@
     (it "installs config"
       (sut/main (util/->transit {:config {:environment "blah"}}))
       (should= "blah" (config/environment)))
+
     )
 
   )

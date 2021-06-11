@@ -15,7 +15,7 @@
   :target-path "tmp/target/%s/"
   :auto-clean false
 
-  :profiles {:server {:jvm-opts ["-Xmx1g" "-server"]}
+  :profiles {;:server {:jvm-opts ["-Xmx1g" "-server"]}
              :dev {:repl-options   {:init-ns app.repl
                                     :timeout 120000}
                    :resource-paths ["resources" "dev"]
@@ -43,6 +43,6 @@
             "css"     ["run" "-m" "c3kit.scaffold.css"]
             "prep"    ["do" "clean," "css" "once," "cljs" "once"]
             "dev"     ["run" "-m" "app.dev"]
-            "page"    ["run" "ws-create" "app.page" opts]
+            "page"    ["run" "ws-create" "app.page-maker" opts]
             }
   )

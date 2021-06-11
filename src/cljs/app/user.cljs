@@ -12,18 +12,19 @@
 
 
 (def user-atom (reagent/atom nil))
-(def data-fetched? (reagent/atom false))
+(def authed? (reagent/atom false))
 
 (defn install! [user] (reset! user-atom user))
 (defn current [] @user-atom)
 (defn clear! [] (reset! user-atom nil))
 
-(defn- data-fetched! [data]
-		(reset! data-fetched? true))
+(defn- authed! [data]
+		(reset! authed? true))
 
 (defn install-and-connect! [user]
 		(if-let [user user]
 				(install! user)
-				(install! {:id (apply * (repeat 4 (rand-int 10000)))}))
-		(ws/start!))
+				(install! {:id (apply * (repeat 4 (rand-int 1000)))}))
+		(ws/start!)
+		(ws/call! :user/auth nil authed!))
 

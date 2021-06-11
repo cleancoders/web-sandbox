@@ -1,9 +1,9 @@
 (ns app.main
-		(:require-all-ns [app.pages])
 		(:require
 			;; MDM - the following namespaces contain multimethod implementations which decouples them nicely.
 			;;   However they need to be required somewhere.
 			[app.home]
+			[app.pages.example-page]
 
 			;; Normal requires
 			[accountant.core :as accountant]
@@ -51,14 +51,16 @@
 		(config/install! config)
 		(if (config/csrf-token)
 				(websocket/start!)
-				;(ajax/get! "/api/user/csrf-token" {} establish-session)
+				(ajax/get! "/api/user/csrf-token" {} establish-session)
 				 ))
 
 (defn ^:export main [payload-src]
+		;(init/install-reagent-db-atom!)
 		(init/configure-api!)
 		(let [payload (utilc/<-transit payload-src)]
+				(println "payload: " payload)
 				(load-config (:config payload))
-				;(user/install-and-connect! (:user payload))
+				;(user/install-and-connect! (:user payload)) ;(:user payload))
 				(load-flash (:flash payload))
 				(dispatch-and-render)
 				(establish-session {})))

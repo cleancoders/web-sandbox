@@ -23,6 +23,7 @@
 (defn current [request] (-> request :session/key load-session))
 
 (defn save-session [key data]
+		(println "data: " data)
 		(if (nil? key)
 				(let [key     (apply * (repeat 4 (rand-int 10000)))
 										session {:id key :kind :session :data (pr-str data) :updated-at (time/now)}]

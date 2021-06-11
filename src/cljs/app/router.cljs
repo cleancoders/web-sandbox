@@ -36,13 +36,14 @@
 		(swap! store/state assoc :page page))
 
 (defn dev-routes []
-		(defroute "/pages/:page" [page] (load-page! (keyword (str "pages/" page))))
+		(defroute "/pages/:page" [page] (load-page! (keyword (str "page/" page))))
 		)
 
 (defn app-routes []
 		(secretary/set-config! :prefix "")
 
 		(defroute "/" [] (load-page! :home))
+		;(defroute "/pages/:page" [page] (load-page! (keyword (str "page/" page))))
 
 		(hook-browser-navigation!))
 

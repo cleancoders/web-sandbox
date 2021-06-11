@@ -78,7 +78,7 @@
 (defn create-user [cc-user]
 		{:id (str (ccc/new-uuid))})
 
-;(defn authorize-user [response user] (update response :session assoc :user user))
+(defn authorize-user [response user] (update response :session assoc :user user))
 
 (defn forbid-user [response] (update response :session dissoc :user))
 

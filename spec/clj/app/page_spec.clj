@@ -1,6 +1,6 @@
 (ns app.page-spec
 		(:require
-			[app.page :as sut]
+			[app.page-maker :as sut]
 			[clojure.java.io :as io]
 			[speclj.core :refer :all]
 			[clojure.string :as string]))

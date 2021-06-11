@@ -1,7 +1,7 @@
 (ns app.pages.example-page
 		(:require [app.page :as page]))
 
-(defmethod page/render :pages/example-page [_]
+(defmethod page/render :page/example-page [_]
 		[:main {:id "-home"}
 			[:section {:class "home"}
 				[:div {:class "container small-width huge-padding-top"}

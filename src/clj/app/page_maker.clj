@@ -1,4 +1,4 @@
-(ns app.page
+(ns app.page-maker
 		(:require [c3kit.apron.log :as log]
 												[clojure.java.io :as io]
 												[clojure.string :as string]))

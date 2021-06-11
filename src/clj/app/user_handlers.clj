@@ -16,7 +16,10 @@
 
 (defn authorize-user [response user] (update response :session assoc :user user))
 
+(defn ws-auth-user [{:keys [request]}]
+		(authorize-user request {:id (apply * (repeat 4 (rand-int 10000)))}))
+
 (defn websocket-open-get [request] (when (user/current request) (@websocket/get-handler request)))
-;(defn websocket-open-post [request] (when (user/current request) (@websocket/post-handler request)))
+(defn websocket-open-post [request] (when (user/current request) (@websocket/post-handler request)))
 
 

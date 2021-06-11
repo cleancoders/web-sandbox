@@ -4,9 +4,10 @@
 			#?(:cljs [app.page :as page])
 			#?(:cljs [reagent.core :as reagent])
 			[app.config :as config]
-			[c3kit.apron.legend :as legend]
-			[c3kit.wire.api :as api]
-			))
+			[c3kit.bucket.db :as db]
+			[c3kit.wire.api :as api]))
+
+#?(:cljs (defn install-reagent-db-atom! [] (db/replace-db-atom! (reagent/atom nil))))
 
 (defn configure-api! []
 		(api/configure! #?(:clj  {:ws-handlers 'app.routes/ws-handlers
