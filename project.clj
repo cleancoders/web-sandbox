@@ -43,6 +43,6 @@
 												"css"  ["run" "-m" "c3kit.scaffold.css"]
 												"prep" ["do" "clean," "css" "once," "cljs" "once"]
 												"dev"  ["run" "-m" "app.dev"]
-												"toy"  ["run" "-m" "app.toy-builder"]
+												"toy"  ["run" "-m" "app.dev-toy-builder"]
 												}
 		)

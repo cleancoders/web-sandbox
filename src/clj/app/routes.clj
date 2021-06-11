@@ -55,17 +55,14 @@
 									(let [method (if (= :any method) nil method)]
 											(compojure/compile-route method path 'req `((redirect-handler ~dest)))))))
 
-(def ws-handlers
-		{
-			:toy/build 'app.toy-builder/-main
-			})
 
 (def ajax-routes-handler
 		(->
 				(lazy-routes
 						{
-							["/user/csrf-token" :get] app.user-handlers/ajax-csrf-token
-							["/user/auth" :post]    app.user-handlers/ajax-auth
+							["/user/csrf-token" :get]      app.user-handlers/ajax-csrf-token
+							["/toy-builder/request-toy" :post] app.toy-builder/request-toy
+							;["/sandbox/:toy" :get]         app.layouts/web-rich-client
 							})
 				(wrap-prefix "/api" ajax/api-not-found-handler)
 				ajax/wrap-ajax))
@@ -73,13 +70,13 @@
 (def web-routes-handlers
 		(lazy-routes
 				{
-					["/" :get]                app.layouts/web-rich-client
+					["/" :get] app.layouts/web-rich-client
 					}))
 
 (def dev-handler
 		(lazy-routes
 				{
-					["/sandbox/:page" :get] app.layouts/web-rich-client
+					["/sandbox/:toy" :get] app.layouts/web-rich-client
 					}))
 
 (defroutes handler

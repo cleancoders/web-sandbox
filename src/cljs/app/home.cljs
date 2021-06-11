@@ -1,23 +1,21 @@
 (ns app.home
 		(:require
-			[c3kit.apron.corec :as ccc]
-			[c3kit.apron.log :as log]
-			[c3kit.wire.js :as wjs]
-			[c3kit.wire.websocket :as ws]
 			[app.layoutc :as layoutc]
 			[app.page :as page]
-			[reagent.core :as reagent]
-			))
+			[c3kit.wire.ajax :as ajax]
+			[c3kit.apron.log :as log]))
 
-(defn create-page []
-		(ws/call! :toy/build {:name "new-page"} #(log/info "page created!")))
+(defn request-new-toy []
+		(let [handler (fn [response]
+																		(log/info response))]
+			(ajax/post! "/api/toy-builder/request-toy" {:name "your-new-toy"} handler)))
 
 (defn list-steps []
 		[:div.container
 			[:hr.margin-bottom]
 			[:div.hgroup.medium-margin-bottom
 				[:h2 "Welcome"]
-				[:button#-create-page-button.primary {:on-click create-page} "Create a Page"]
+				[:button#-build-toy-button.primary {:on-click request-new-toy} "Create a Page"]
 				]
 			[:ul {:id "-interactive" :class "interactive small-margin-bottom"}
 				[:li {:id "step-1"}

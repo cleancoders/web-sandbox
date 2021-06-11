@@ -1,7 +1,7 @@
 (ns app.sandbox.example-toy
 		(:require [app.page :as page]))
 
-(defmethod page/render :page/example-page [_]
+(defmethod page/render :sandbox/example-toy [_]
 		[:main {:id "-home"}
 			[:section {:class "home"}
 				[:div {:class "container small-width huge-padding-top"}

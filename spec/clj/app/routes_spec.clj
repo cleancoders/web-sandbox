@@ -6,8 +6,9 @@
    [c3kit.wire.spec-helper :as wire-helper]
    [c3kit.wire.websocket :as ws]
    [app.routes :as routes]
-   [app.user-handlers]
    [app.spec-helper]
+   [app.dev-toy-builder]
+   [app.user-handlers]
    [speclj.core :refer :all]
    [speclj.stub :as stub]
    [app.layouts :as layouts]
@@ -51,13 +52,16 @@
 
   ;; web routes
   (test-route "/" :get app.layouts/web-rich-client)
-  (test-route "/sandbox/example-page" :get app.layouts/web-rich-client)
-
-  ; websocket handlers
-  (test-webs :toy/build app.toy-builder/-main)
+  (test-route "/sandbox/example-toy" :get app.layouts/web-rich-client)
 
   ;; ajax routes
   (test-route "/api/user/csrf-token" :get app.user-handlers/ajax-csrf-token)
+  (test-route "/api/toy-builder/request-toy" :post app.toy-builder/request-toy)
+
+  ;; dev routes
+  (test-route "/sandbox/example-toy" :get app.layouts/web-rich-client)
+  (test-route "/sandbox/blah" :get app.layouts/web-rich-client)
+
 
   (it "not-found global - nil - handled by http"
     (let [response (routes/handler {:uri "/blah" :request-method :get})]

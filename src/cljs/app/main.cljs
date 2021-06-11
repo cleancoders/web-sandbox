@@ -3,7 +3,7 @@
 			;; MDM - the following namespaces contain multimethod implementations which decouples them nicely.
 			;;   However they need to be required somewhere.
 			[app.home]
-			[app.pages.example-toy]
+			[app.sandbox.example-toy]
 
 			;; Normal requires
 			[accountant.core :as accountant]
@@ -12,13 +12,11 @@
 			[c3kit.wire.ajax :as ajax]
 			[c3kit.wire.api :as api]
 			[c3kit.wire.flash :as flash]
-			[c3kit.wire.websocket :as websocket]
 			[goog.events]
 			[app.config :as config]
 			[app.init :as init]
 			[app.layout :as layout]
 			[app.router :as router]
-			[app.user :as user]
 			[reagent.dom :as dom]
 			))
 
@@ -58,7 +56,6 @@
 		;(init/install-reagent-db-atom!)
 		(init/configure-api!)
 		(let [payload (utilc/<-transit payload-src)]
-				(println "payload: " payload)
 				(load-config (:config payload))
 				;(user/install-and-connect! (:user payload))
 				(load-flash (:flash payload))

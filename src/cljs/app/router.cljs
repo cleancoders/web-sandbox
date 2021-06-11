@@ -4,8 +4,7 @@
 			[accountant.core :as accountant]
 			[c3kit.apron.log :as log]
 			[app.page :as store :refer [render]]
-			[secretary.core :as secretary]
-			[app.page :as page]))
+			[secretary.core :as secretary]))
 
 (def default-title "A Clean Coders Studio Web-App Template")
 
@@ -36,14 +35,13 @@
 		(swap! store/state assoc :page page))
 
 (defn dev-routes []
-		(defroute "/pages/:page" [page] (load-page! (keyword (str "page/" page))))
+		(defroute "/sandbox/:toy" [toy] (load-page! (keyword (str "sandbox/" toy))))
 		)
 
 (defn app-routes []
 		(secretary/set-config! :prefix "")
 
 		(defroute "/" [] (load-page! :home))
-		;(defroute "/pages/:page" [page] (load-page! (keyword (str "page/" page))))
 
 		(hook-browser-navigation!))
 
