@@ -28,6 +28,6 @@
     (router/app-routes))
 
   (it-routes "/" :home)
-  (it-routes "/pages/example-page" :page/example-page)
+  (it-routes "/sandbox/example-page" :sandbox/example-page)
 
   )

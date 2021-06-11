@@ -57,15 +57,15 @@
 
 (def ws-handlers
 		{
-			:page/create 'app.page-maker/ws-create
-			:user/auth 'app.user-handlers/ws-auth-user
+			:toy/build 'app.toy-builder/-main
 			})
 
 (def ajax-routes-handler
 		(->
 				(lazy-routes
 						{
-							["/user/csrf-token" :get]          app.user-handlers/ajax-csrf-token
+							["/user/csrf-token" :get] app.user-handlers/ajax-csrf-token
+							["/user/auth" :post]    app.user-handlers/ajax-auth
 							})
 				(wrap-prefix "/api" ajax/api-not-found-handler)
 				ajax/wrap-ajax))
@@ -73,15 +73,13 @@
 (def web-routes-handlers
 		(lazy-routes
 				{
-					["/" :get]               app.layouts/web-rich-client
-					["/user/websocket" :get] app.user-handlers/websocket-open-get
-					["/user/websocket" :post] app.user-handlers/websocket-open-post
+					["/" :get]                app.layouts/web-rich-client
 					}))
 
 (def dev-handler
 		(lazy-routes
 				{
-					["/pages/:page" :get] app.layouts/web-rich-client
+					["/sandbox/:page" :get] app.layouts/web-rich-client
 					}))
 
 (defroutes handler

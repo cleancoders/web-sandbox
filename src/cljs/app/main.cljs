@@ -3,7 +3,7 @@
 			;; MDM - the following namespaces contain multimethod implementations which decouples them nicely.
 			;;   However they need to be required somewhere.
 			[app.home]
-			[app.pages.example-page]
+			[app.pages.example-toy]
 
 			;; Normal requires
 			[accountant.core :as accountant]
@@ -49,10 +49,10 @@
 
 (defn establish-session [config]
 		(config/install! config)
-		(if (config/csrf-token)
-				(websocket/start!)
-				(ajax/get! "/api/user/csrf-token" {} establish-session)
-				 ))
+		;(if (config/csrf-token)
+				;(websocket/start!)
+				;(ajax/get! "/api/user/csrf-token" {} establish-session)
+				 )
 
 (defn ^:export main [payload-src]
 		;(init/install-reagent-db-atom!)
@@ -60,9 +60,10 @@
 		(let [payload (utilc/<-transit payload-src)]
 				(println "payload: " payload)
 				(load-config (:config payload))
-				;(user/install-and-connect! (:user payload)) ;(:user payload))
+				;(user/install-and-connect! (:user payload))
 				(load-flash (:flash payload))
 				(dispatch-and-render)
-				(establish-session {})))
+				;(establish-session {})
+				))
 
 (enable-console-print!)

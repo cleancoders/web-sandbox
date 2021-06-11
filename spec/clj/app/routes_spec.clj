@@ -51,13 +51,10 @@
 
   ;; web routes
   (test-route "/" :get app.layouts/web-rich-client)
-  (test-route "/pages/example-page" :get app.layouts/web-rich-client)
-  (test-route "/user/websocket" :get app.user-handlers/websocket-open-get)
-  (test-route "/user/websocket" :post app.user-handlers/websocket-open-post)
+  (test-route "/sandbox/example-page" :get app.layouts/web-rich-client)
 
   ; websocket handlers
-  (test-webs :user/auth app.user-handlers/ws-auth-user)
-  (test-webs :page/create app.page-maker/ws-create)
+  (test-webs :toy/build app.toy-builder/-main)
 
   ;; ajax routes
   (test-route "/api/user/csrf-token" :get app.user-handlers/ajax-csrf-token)

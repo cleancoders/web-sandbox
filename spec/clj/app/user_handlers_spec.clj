@@ -4,7 +4,7 @@
    [c3kit.wire.websocket :as websocket]
    [app.user-handlers :as sut]
    [speclj.core :refer :all]
-   ))
+   [speclj.stub :as stub]))
 
 (def request :undefined)
 
@@ -28,11 +28,35 @@
         (should-contain :csrf? (:session response))))
     )
 
+
+  (context "ajax csrf token"
+    (it "returns the csrf-token"
+      (let [response (sut/ajax-csrf-token {:session/key "abc123"
+                                           :session     {:ring.middleware.anti-forgery/anti-forgery-token "xyz789"}})]
+        (should= 200 (:status response))
+        (should= :ok (ajax/status response))
+        (should= "abc123" (:csrf-token (ajax/payload response)))
+        (should= "xyz789" (:anti-forgery-token (ajax/payload response)))))
+
+    ;(it "auths user"
+    ;  (let [[path params] (stub/last-invocation-of :get)]
+    ;    (should= "http://localhost:8082/path" path)
+    ;    (should= "web-app" (:client-id (:query-params params)))
+    ;    (should= "DFDLZ52YSHF24G6LKDLA" (:secret-key (:query-params params)))
+    ;    (should= "blah" (:token (:query-params params)))))
+    ;
+    ;(it "puts something in the session to make sure one exists"
+    ;  (let [response (sut/ajax-csrf-token {:session/key "abc123" :session {:foo :bar}})]
+    ;    (should= :bar (-> response :session :foo))
+    ;    (should-contain :csrf? (:session response))))
+    )
+
+
   (context "websocket-open"
 
     (around [it]
       (with-redefs [websocket/get-handler (delay (stub :websocket/get-handler {:return :connected}))
-                    ;websocket/post-handler (delay (stub :websocket/post-handler {:return :connected}))
+                    websocket/post-handler (delay (stub :websocket/post-handler {:return :connected}))
                      ]
         (it)))
 
@@ -49,10 +73,10 @@
         (should= :connected response)
         (should-have-invoked :websocket/get-handler)))
 
-    ;(it "post - with user"
-    ;  (let [response (sut/websocket-open-post {:session {:user @holdem/earl}})]
-    ;    (should= :connected response)
-    ;    (should-have-invoked :websocket/post-handler)))
+    (it "post - with user"
+      (let [response (sut/websocket-open-post {:session {:user {:id "id123"}}})]
+        (should= :connected response)
+        (should-have-invoked :websocket/post-handler)))
 
     )
   )

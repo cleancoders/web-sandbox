@@ -10,14 +10,14 @@
 			))
 
 (defn create-page []
-		(ws/call! :page/create {:name "new-page"} #(log/info "page created!")))
+		(ws/call! :toy/build {:name "new-page"} #(log/info "page created!")))
 
 (defn list-steps []
 		[:div.container
 			[:hr.margin-bottom]
 			[:div.hgroup.medium-margin-bottom
 				[:h2 "Welcome"]
-				;[:button#-create-page-button.primary {:on-click create-page} "Create a Page"]
+				[:button#-create-page-button.primary {:on-click create-page} "Create a Page"]
 				]
 			[:ul {:id "-interactive" :class "interactive small-margin-bottom"}
 				[:li {:id "step-1"}

@@ -22,11 +22,11 @@
 				(page/install-page! :home)
 				(wire-helper/render [layout/default]))
 
-		(it "create new page button"
-				(should-select "#-create-page-button")
-				(wire-helper/click! "#-create-page-button")
-				(should-have-invoked :ws/call!)
-				(should= :page/create (wire-helper/last-ws-call-id)))
+		;(it "create new page button"
+		;		(should-select "#-create-page-button")
+		;		(wire-helper/click! "#-create-page-button")
+		;		(should-have-invoked :ws/call!)
+		;		(should= :page/create (wire-helper/last-ws-call-id)))
 
 		)
 

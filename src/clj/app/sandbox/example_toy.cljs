@@ -1,4 +1,4 @@
-(ns app.pages.example-page
+(ns app.sandbox.example-toy
 		(:require [app.page :as page]))
 
 (defmethod page/render :page/example-page [_]
