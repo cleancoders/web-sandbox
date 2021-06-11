@@ -60,8 +60,9 @@
 		(->
 				(lazy-routes
 						{
-							["/user/csrf-token" :get]      app.user-handlers/ajax-csrf-token
+							;["/user/csrf-token" :get]      app.user-handlers/ajax-csrf-token
 							["/toy-builder/request-toy" :post] app.toy-builder/request-toy
+							["/sandbox/toys" :get]             app.toy-loader/load-toys
 							;["/sandbox/:toy" :get]         app.layouts/web-rich-client
 							})
 				(wrap-prefix "/api" ajax/api-not-found-handler)

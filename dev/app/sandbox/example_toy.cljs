@@ -12,7 +12,15 @@
 						[:div {:class "container"}
 							[:hr {:class "margin-bottom"}]
 							[:div {:class "hgroup medium-margin-bottom"}
-								[:h2 "Example Page"]
-							]]]]]]
+								[:h2 "Example of a Sandbox Toy"]]
+								[:ul {:id "-interactive" :class "interactive small-margin-bottom"}
+									[:li {:id "pail"}
+										[:span {:class "name"} "pail"]]
+									[:li {:id "shovel"}
+										[:span {:class "name"} "shovel"]]
+									[:li {:id "castle-mold"}
+										[:span {:class "name"} "castle mold"]]]
+							]]]]]
 		)
+
 
