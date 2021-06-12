@@ -12,14 +12,18 @@
 						[:div {:class "container"}
 							[:hr {:class "margin-bottom"}]
 							[:div {:class "hgroup medium-margin-bottom"}
-								[:h2 "Example of a Sandbox Toy"]]
+								[:h2 "Example Sandbox Toys"]]
 								[:ul {:id "-interactive" :class "interactive small-margin-bottom"}
 									[:li {:id "pail"}
 										[:span {:class "name"} "pail"]]
 									[:li {:id "shovel"}
 										[:span {:class "name"} "shovel"]]
 									[:li {:id "castle-mold"}
-										[:span {:class "name"} "castle mold"]]]
+										[:span {:class "name"} "castle mold"]]
+									[:li {:id "toy-bot"}
+										[:span {:class "name"} "toy boat"]]
+									[:li {:id "monster trucks"}
+										[:span {:class "name"} "monster trucks"]]]
 							]]]]]
 		)
 

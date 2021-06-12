@@ -3,7 +3,7 @@
 												[clojure.java.io :as io]
 												[clojure.string :as str]))
 
-(def path (str (.getCanonicalPath (io/file ".")) "/dev/app/sandbox/"))
+(def path (str (.getCanonicalPath (io/file ".")) "/src/clj/app/sandbox/"))
 
 (defn build-toy [name]
 		(let [name (str/replace name #" " "-")

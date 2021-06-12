@@ -29,7 +29,7 @@
 			[:hr.margin-bottom]
 			[:div.hgroup.medium-margin-bottom
 				[:h2 "Welcome"]
-				[:button#-build-toy-button.primary {:on-click request-new-toy} "Create a Page"]
+				[:button#-build-toy-button.primary {:on-click request-new-toy} "Create a Sandbox Toy"]
 				]
 			[:ul {:id "-interactive" :class "interactive small-margin-bottom"}
 				[:li {:id "step-1"}

@@ -5,7 +5,7 @@
 			[clojure.java.io :as io]
 			[speclj.core :refer :all]))
 
-(def path (str (.getCanonicalPath (io/file ".")) "/dev/app/sandbox"))
+(def path (str (.getCanonicalPath (io/file ".")) "/src/clj/app/sandbox"))
 
 
 (describe "toy builder"
