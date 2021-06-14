@@ -29,6 +29,14 @@
 				(should-have-invoked :ajax/post!)
 				(should= "/api/toy-builder/request-toy" (wire-helper/last-ajax-post-url)))
 
+		(it "request-new-story with no name"
+				(reset! sut/name nil)
+				(with-redefs [sut/request-new-toy (stub :request-toy)]
+						(should-select "#-new-toy-title")
+						(should-select "#-build-toy-button")
+						(wire-helper/click! "#-build-toy-button")
+						(should-have-invoked :request-toy {:with ["your-new-sandbox-toy"]}))
+
 		(it "request-new-story"
 				(reset! sut/name "test-toy")
 				(with-redefs [sut/request-new-toy (stub :request-toy)]
@@ -36,13 +44,7 @@
 						(should-select "#-build-toy-button")
 						(wire-helper/click! "#-build-toy-button")
 						(should-have-invoked :request-toy {:with ["test-toy"]})))
-
-		(it "request-new-story with no name"
-				(with-redefs [sut/request-new-toy (stub :request-toy)]
-						(should-select "#-new-toy-title")
-						(should-select "#-build-toy-button")
-						(wire-helper/click! "#-build-toy-button")
-						(should-have-invoked :request-toy {:with ["your-new-sandbox-toy"]})))
+				)
 
 
 		;(context "new sandbox toy modal"
