@@ -7,10 +7,12 @@
 			[c3kit.apron.log :as log]
 			[reagent.core :as reagent]))
 
-(defn request-new-toy []
+(def name (reagent/atom nil))
+
+(defn request-new-toy [name]
 		(let [handler (fn [response]
 																		(log/info (str (:new-toy response) " created")))]
-			(ajax/post! "/api/toy-builder/request-toy" {:name "your-new-sandbcx-toy"} handler)))
+				(ajax/post! "/api/toy-builder/request-toy" {:name name} handler)))
 
 (defmethod modal/modal-content :home/build-toy [_]
 		[:div.modal.card
@@ -29,7 +31,6 @@
 			[:hr.margin-bottom]
 			[:div.hgroup.medium-margin-bottom
 				[:h2 "Welcome"]
-				[:button#-build-toy-button.primary {:on-click request-new-toy} "Create a Sandbox Toy"]
 				]
 			[:ul {:id "-interactive" :class "interactive small-margin-bottom"}
 				[:li {:id "step-1"}
@@ -49,7 +50,10 @@
 				[:li {:id "step-6"}
 					[:span {:class "name"} "6. In the browser, go to:\r\n"
 						[:br] "localhost:8082/pages/{NAME}"]]
-				]])
+				]
+			[:div.hgroup.medium-margin-bottom
+				[:input#-new-toy-title.text {:type "text" :on-change (fn [val] (reset! name (-> val .-target .-value)))}]
+				[:button#-build-toy-button.primary {:on-click #(request-new-toy (if (nil? @name) "your-new-sandbox-toy" @name))} "Create a Sandbox Toy"]]])
 
 (defmethod page/render :home [_]
 		[:main#-home

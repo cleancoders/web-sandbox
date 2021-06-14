@@ -4,7 +4,6 @@
 
 		:dependencies [[clj-http "3.12.1" :exclusions [commons-codec]]
 																	[com.cleancoders.c3kit/wire "1.0.5"]
-																	;[com.google.api-client/google-api-client "1.30.4" :exclusions [com.google.guava/guava]]
 																	[compojure "1.6.1" :exclusions [ring/ring-core ring/ring-codec]]
 																	[hiccup "1.0.5"]
 																	[org.clojure/clojure "1.10.3"]
@@ -15,8 +14,7 @@
 		:target-path "tmp/target/%s/"
 		:auto-clean false
 
-		:profiles {;:server {:jvm-opts ["-Xmx1g" "-server"]}
-             :dev {:repl-options   {:init-ns app.repl
+		:profiles {:dev {:repl-options   {:init-ns app.repl
                                     :timeout 120000}
                    :resource-paths ["resources" "dev"]
                    :dependencies   [[clj-commons/secretary "1.2.4"]
