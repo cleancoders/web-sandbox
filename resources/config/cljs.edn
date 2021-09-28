@@ -12,28 +12,28 @@
                :verbose        false
                :watch-fn       c3kit.scaffold.cljs/on-dev-compiled
                }
-	:production  {
-															:cache-analysis false
-															;:externs        ["dev/app/externs/gapi.js"]
-															:infer-externs  true
-															:optimizations  :advanced
-															:output-dir     "resources/public/cljs/"
-															:output-to      "resources/public/cljs/app.js"
-															:pretty-print   false
-															:sources        ["src/cljc" "src/cljs"]
-															:specs          false
-															:verbose        false
-															}
-	:staging     {
-															:cache-analysis false
-															:infer-externs  true
-															:optimizations  :whitespace
-															:output-dir     "resources/public/cljs/"
-															:output-to      "resources/public/cljs/app.js"
-															:pretty-print   true
-															:pseudo-names   true
-															:sources        ["src/cljc" "src/cljs"]
-															:specs          false
-															:verbose        false
-															}
+ :production  {
+               :cache-analysis false
+               ;:externs        ["dev/app/externs/gapi.js"]
+               :infer-externs  true
+               :optimizations  :advanced
+               :output-dir     "resources/public/cljs/"
+               :output-to      "resources/public/cljs/app.js"
+               :pretty-print   false
+               :sources        ["src/cljc" "src/cljs"]
+               :specs          false
+               :verbose        false
+               }
+ :staging     {
+               :cache-analysis false
+               :infer-externs  true
+               :optimizations  :whitespace
+               :output-dir     "resources/public/cljs/"
+               :output-to      "resources/public/cljs/app.js"
+               :pretty-print   true
+               :pseudo-names   true
+               :sources        ["src/cljc" "src/cljs"]
+               :specs          false
+               :verbose        false
+               }
  }
