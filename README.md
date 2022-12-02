@@ -1,5 +1,7 @@
 # Clean Coders Web Sandbox
 
+# DEPRECATED
+
 ### Description
 This application is a sandbox for web-page design and modest development.  It includes a server that can be run 
 locally currently set to port 8082.  It allows a user to customize 'toys' in the sandbox using Reagent sytax, which
